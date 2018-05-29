@@ -49,8 +49,12 @@ internal class SDKSharingDelegateBridge<Content: ContentProtocol>: NSObject, FBS
   }
 
   func sharer(_ sharer: FBSDKSharing, didFailWithError error: Error) {
-    let error: Error = ShareError(error: (error as NSError)) as Error? ?? error
-    completion?(.failed(error))
+    var parsedError: Error? = .none
+    if let nsError = error as? NSError {
+      parsedError = ShareError(error: nsError)
+    }
+
+    completion?(.failed(parsedError ?? error))
   }
 
   func sharerDidCancel(_ sharer: FBSDKSharing) {
