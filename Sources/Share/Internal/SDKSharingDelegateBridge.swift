@@ -1,4 +1,4 @@
-// Copyright (c) 2016-present, Facebook, Inc. All rights reserved.
+in// Copyright (c) 2016-present, Facebook, Inc. All rights reserved.
 //
 // You are hereby granted a non-exclusive, worldwide, royalty-free license to use,
 // copy, modify, and distribute this software in source code or binary form for use
@@ -48,7 +48,7 @@ internal class SDKSharingDelegateBridge<Content: ContentProtocol>: NSObject, FBS
     completion?(result)
   }
 
-  func sharer(_ sharer: FBSDKSharing, didFailWithError error: Error) {
+  func sharer(_ sharer: FBSDKSharing, didFailWithError error: Error?) {
     let error: Error = ShareError(error: (error as NSError)) as Error? ?? error
     completion?(.failed(error))
   }
